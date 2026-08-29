@@ -1,0 +1,47 @@
+# Render deployment blueprint.
+#
+# Render reads this file when you connect the repo, so the service is created
+# with the right build/start commands instead of you filling them in by hand.
+#
+# Secrets are deliberately NOT in this file — every value below is marked
+# `sync: false`, which tells Render to prompt for it in the dashboard. Nothing
+# sensitive is ever committed to the repository.
+services:
+  - type: web
+    name: fastresume-preview
+    runtime: node
+    plan: free
+    # Free instances sleep when idle; the first request after a sleep takes
+    # ~30s to wake. Fine for showing someone the app, not for real users.
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_ENV
+        value: production
+
+      # --- Baked into the browser bundle at BUILD time -------------------
+      # These must be present before `npm run build` runs, not just at
+      # runtime, because Vite inlines them into the JS it emits.
+      - key: VITE_SUPABASE_URL
+        sync: false
+      - key: VITE_SUPABASE_ANON_KEY
+        sync: false
+
+      # --- Server-side only. Never prefix these with VITE_ ---------------
+      - key: SUPABASE_URL
+        sync: false
+      - key: SUPABASE_SERVICE_ROLE_KEY
+        sync: false
+      - key: GEMINI_API_KEY
+        sync: false
+
+      # --- Optional -----------------------------------------------------
+      # Leave unset unless the preview needs to take payments.
+      - key: STRIPE_SECRET_KEY
+        sync: false
+      - key: STRIPE_WEBHOOK_SECRET
+        sync: false
+      # Comma-separated emails that get unlimited credits.
+      - key: ADMIN_EMAILS
+        sync: false

@@ -1,0 +1,38 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8" />
+<style>
+  body {
+    width: 300px; margin: 0; padding: 20px;
+    font-family: "Plus Jakarta Sans", ui-sans-serif, system-ui, -apple-system, sans-serif;
+    color: #0f172a;
+  }
+  h1 { margin: 0; font-size: 15px; font-weight: 800; }
+  p { font-size: 12px; line-height: 1.6; color: #64748b; margin: 8px 0 0; }
+  .status { margin-top: 14px; padding: 11px 13px; border-radius: 14px; font-size: 12px; font-weight: 700; }
+  .in  { background: #ecfdf5; color: #047857; border: 1px solid #a7f3d0; }
+  .out { background: #fff1f2; color: #e11d48; border: 1px solid #fecdd3; }
+  a.btn {
+    display: block; margin-top: 14px; padding: 11px; border-radius: 14px;
+    background: #0f172a; color: #fff; text-align: center; text-decoration: none;
+    font-size: 12.5px; font-weight: 800;
+  }
+  a.btn:hover { background: #4f46e5; }
+  ul { margin: 10px 0 0; padding-left: 18px; }
+  li { font-size: 11.5px; color: #64748b; line-height: 1.7; }
+</style>
+</head>
+<body>
+  <h1>FastResume Career Agent</h1>
+  <p>Open a job ad on a supported site and the panel appears on the right.</p>
+  <div id="status" class="status out">Checking…</div>
+  <a class="btn" id="open" href="#" target="_blank">Open FastResume</a>
+  <ul>
+    <li>SEEK · LinkedIn · Indeed</li>
+    <li>BOSS直聘 · 猎聘 · 智联 · 前程无忧</li>
+    <li>Company career pages</li>
+  </ul>
+  <script src="popup.js"></script>
+</body>
+</html>

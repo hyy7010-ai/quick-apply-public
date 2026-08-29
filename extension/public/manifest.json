@@ -1,0 +1,61 @@
+{
+  "manifest_version": 3,
+  "name": "FastResume Career Agent",
+  "version": "0.3.0",
+  "description": "Read the job you're looking at, see how well it actually fits, and tailor your resume for it — without leaving the page.",
+  "permissions": [
+    "storage",
+    "activeTab",
+    "scripting",
+    "tabs"
+  ],
+  "host_permissions": [
+    "http://localhost:3000/*",
+    "https://fastresume.xyz/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_title": "FastResume Career Agent",
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "comment": "Harvests the Supabase session the user already has on the web app, so the extension shares one account instead of running its own login. Content scripts can read the page's localStorage, which makes this far simpler and less fragile than an OAuth flow inside the extension.",
+      "matches": [
+        "http://localhost:3000/*",
+        "https://fastresume.xyz/*"
+      ],
+      "js": [
+        "content-auth.js"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "comment": "Job boards. Each site has its own extractor in adapters.ts; the generic fallback handles company career pages.",
+      "matches": [
+        "https://*.seek.com/*",
+        "https://*.seek.com.au/*",
+        "https://*.linkedin.com/jobs/*",
+        "https://*.indeed.com/*",
+        "https://*.zhipin.com/*",
+        "https://*.liepin.com/*",
+        "https://*.zhaopin.com/*",
+        "https://*.51job.com/*"
+      ],
+      "js": [
+        "content-job.js"
+      ],
+      "css": [
+        "panel.css"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  }
+}

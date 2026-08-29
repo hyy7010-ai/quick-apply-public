@@ -1,0 +1,48 @@
+{
+  "name": "history",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "tsx server.ts",
+    "start": "node dist/server.cjs",
+    "build": "vite build && esbuild server.ts --bundle --platform=node --target=node18 --external:vite --external:lightningcss --external:esbuild --outfile=dist/server.cjs",
+    "lint": "tsc --noEmit",
+    "preview": "vite preview",
+    "build:ext": "node scripts/build-extension.mjs",
+    "dev:en": "PORT=3000 DEFAULT_LANG=en tsx server.ts",
+    "dev:zh": "PORT=3001 DEFAULT_LANG=zh tsx server.ts"
+  },
+  "dependencies": {
+    "@google/genai": "^1.33.0",
+    "@google/generative-ai": "^0.24.1",
+    "@mediapipe/tasks-vision": "0.10.14",
+    "@supabase/supabase-js": "2",
+    "@tailwindcss/vite": "^4.2.2",
+    "cheerio": "^1.2.0",
+    "cors": "^2.8.6",
+    "dotenv": "^17.3.1",
+    "express": "^4.21.2",
+    "lucide-react": "^1.7.0",
+    "mammoth": "^1.11.0",
+    "motion": "^12.38.0",
+    "qrcode": "^1.5.4",
+    "react": "^19.2.3",
+    "react-dom": "^19.2.3",
+    "react-markdown": "9",
+    "stripe": "^21.0.1",
+    "tailwindcss": "^4.2.2",
+    "tsx": "^4.21.0"
+  },
+  "devDependencies": {
+    "@types/chrome": "^0.2.7",
+    "@types/cors": "^2.8.19",
+    "@types/express": "^4.17.21",
+    "@types/node": "^22.14.0",
+    "@types/qrcode": "^1.5.6",
+    "@vitejs/plugin-react": "^5.0.0",
+    "esbuild": "^0.27.4",
+    "typescript": "~5.8.2",
+    "vite": "^6.2.0"
+  }
+}

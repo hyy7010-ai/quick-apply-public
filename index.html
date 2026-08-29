@@ -1,0 +1,73 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI Fast Resume</title>
+    <!-- Favicon for browsers and search engines -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="shortcut icon" href="/favicon.svg">
+    <link rel="apple-touch-icon" href="/favicon.svg">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:wght@700&family=Dancing+Script:wght@600&family=Inter:wght@400;700;900&family=Lora:ital,wght@0,400..700;1,400..700&family=Merriweather:wght@400;700;900&display=swap" rel="stylesheet">
+    <!-- Third-party bundles are pinned with subresource integrity: if a CDN
+         ever serves different bytes, the browser refuses to run them. `defer`
+         keeps them out of the critical rendering path (both are only used on
+         demand: html2pdf on export, pdf.js after load). -->
+    <script defer crossorigin="anonymous"
+            integrity="sha384-Yv5O+t3uE3hunW8uyrbpPW3iw6/5/Y7HitWJBLgqfMoA36NogMmy+8wWZMpn3HWc"
+            src="https://cdn.jsdelivr.net/npm/html2pdf.js@0.10.1/dist/html2pdf.bundle.min.js"></script>
+    <script defer crossorigin="anonymous"
+            integrity="sha384-/1qUCSGwTur9vjf/z9lmu/eCUYbpOTgSjmpbMQZ1/CtX2v/WcAIKqRv+U1DUCG6e"
+            src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+    <script>
+      window.onload = function() {
+        if (window.pdfjsLib) {
+          window.pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+        }
+      };
+      // Dev-only crash overlay. Injecting error text as innerHTML in production
+      // both leaks stack traces to end users and turns any string that reaches
+      // an error message into markup.
+      (function () {
+        var isDev = ['localhost', '127.0.0.1', '[::1]'].indexOf(location.hostname) !== -1;
+        if (!isDev) return;
+
+        function showErrorOverlay(msg, details) {
+          if (msg && msg.toString().indexOf('WebSocket') !== -1) return; // benign Vite HMR noise
+          var div = document.createElement('div');
+          div.style.cssText = 'position:fixed;bottom:10px;right:10px;max-width:400px;padding:15px;background:#fee2e2;color:#991b1b;font-family:sans-serif;z-index:9999;border-radius:8px;box-shadow:0 4px 6px rgba(0,0,0,0.1);font-size:12px;overflow-wrap:break-word;';
+
+          var title = document.createElement('strong');
+          title.textContent = 'Error: ';
+          var text = document.createTextNode(String(msg));
+          var pre = document.createElement('pre');
+          pre.style.cssText = 'margin-top:8px;max-height:150px;overflow:auto;';
+          pre.textContent = String(details == null ? '' : details);
+          var btn = document.createElement('button');
+          btn.textContent = 'Dismiss';
+          btn.style.cssText = 'margin-top:8px;padding:4px 8px;cursor:pointer;';
+          btn.onclick = function () { div.remove(); };
+
+          div.appendChild(title);
+          div.appendChild(text);
+          div.appendChild(pre);
+          div.appendChild(btn);
+          document.body.appendChild(div);
+        }
+
+        window.onerror = function (message, source, lineno, colno, error) {
+          showErrorOverlay(message, source + ':' + lineno + ':' + colno + '\n' + (error && error.stack ? error.stack : ''));
+        };
+        window.addEventListener('unhandledrejection', function (event) {
+          showErrorOverlay(event.reason, event.reason && event.reason.stack ? event.reason.stack : '');
+        });
+      })();
+    </script>
+    <link rel="stylesheet" href="/index.css">
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/index.tsx"></script>
+  </body>
+</html>

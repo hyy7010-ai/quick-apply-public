@@ -1,0 +1,8 @@
+{
+  "name": "AI Fast Resume",
+  "description": "The ultimate AI career suite: Pass ATS filters, land more interviews, and build professional portfolios in minutes with AI Fast Resume.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone"
+  ]
+}
