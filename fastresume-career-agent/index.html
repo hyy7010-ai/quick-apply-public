@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#0b2545" />
+    <title>FastResume Career Agent</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Noto+Sans+SC:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body data-theme="minimal">
+    <div class="app-shell">
+      <aside class="sidebar" aria-label="主导航">
+        <a class="brand" href="#home" aria-label="FastResume 首页">
+          <span class="brand-mark">F</span><span>FastResume<small>CAREER AGENT</small></span>
+        </a>
+        <nav class="nav-list" aria-label="功能导航">
+          <button class="nav-item active" data-view="home">
+            <span class="nav-icon icon-overview">▦</span><span>今日概览</span>
+          </button>
+          <button class="nav-item" data-view="jobs">
+            <span class="nav-icon icon-jobs">⌁</span><span>岗位机会</span><span class="nav-count">12</span>
+          </button>
+          <button class="nav-item" data-view="applications">
+            <span class="nav-icon icon-tasks">↗</span><span>投递任务</span><span class="nav-count" id="applicationCount">3</span>
+          </button>
+          <button class="nav-item" data-view="profile">
+            <span class="nav-icon icon-profile">▣</span><span>职业档案</span>
+          </button>
+        </nav>
+        <div class="sidebar-bottom">
+          <div class="secure-note">
+            <span class="secure-icon">◈</span><div><strong>官方直达投递</strong><br />不代管招聘网站密码</div>
+          </div>
+          <button class="user-switcher" data-view="profile">
+            <span class="avatar">V</span>
+            <span><strong>Victoria</strong><small>求职冲刺期</small></span>
+            <span class="chevron">⌄</span>
+          </button>
+        </div>
+      </aside>
+
+      <main class="main-content">
+        <header class="topbar">
+          <button class="mobile-menu" id="menuButton" aria-label="打开导航">☰</button>
+          <div class="breadcrumb" id="breadcrumb">今天是 <strong>8 月 24 日，星期一</strong></div>
+          <div class="topbar-actions">
+            <button class="theme-trigger" id="themeTrigger" aria-expanded="false"><span class="theme-swatch"></span>主题 <span>⌄</span></button>
+            <div class="theme-menu" id="themeMenu" hidden>
+              <p>选择界面主题</p>
+              <button data-theme-choice="cute"><span class="theme-dot cute-dot"></span><span><b>可爱</b><small>明亮、好运加持</small></span><i>✓</i></button>
+              <button data-theme-choice="minimal"><span class="theme-dot minimal-dot"></span><span><b>简约</b><small>清晰、低干扰</small></span><i>✓</i></button>
+              <button data-theme-choice="business"><span class="theme-dot business-dot"></span><span><b>商务</b><small>成熟、专注</small></span><i>✓</i></button>
+            </div>
+            <button class="icon-button" data-toast="目前没有新提醒" aria-label="提醒">◌<span class="notification-dot"></span></button>
+          </div>
+        </header>
+
+        <section id="home" class="view active-view" aria-labelledby="homeTitle">
+          <div class="overview-heading">
+            <div><p class="eyebrow">CAREER OPERATING SYSTEM</p><h1 id="homeTitle">早上好，Victoria。</h1><p>专注当下，把每一次投递变成清晰的下一步。</p></div>
+            <button class="outline-button" data-view="profile">更新职业档案 <span>→</span></button>
+          </div>
+
+          <div class="overview-grid">
+            <section class="dashboard-card official-card">
+              <header><div class="card-label"><span class="dash-icon icon-overview">▦</span><div><h2>今日新开校招</h2><p>官方招聘渠道监测</p></div></div><button class="text-button" data-view="jobs">查看机会 →</button></header>
+              <div class="source-line"><span class="verified-badge">● 官网核验机制</span><span>正式接入后展示更新时间</span></div>
+              <div class="official-empty"><strong>等待连接企业招聘官网</strong><p>演示站不会把未经核验的信息标为“今日新开”。接入后将展示岗位链接、发布时间与官网来源。</p><button class="quiet-link" data-toast="正式版将按企业官网、职位链接和抓取时间三重核验">查看核验规则 →</button></div>
+            </section>
+
+            <section class="dashboard-card checkin-card">
+              <header><div class="card-label"><span class="dash-icon icon-checkin">✓</span><div><h2>今日求职打卡</h2><p>简历筛选 · 每日精进</p></div></div><button class="text-button" data-toast="本周已完成 1 次简历筛选">打卡日历</button></header>
+              <div class="week-strip" aria-label="本周打卡进度"><div class="done"><span>一</span><b>✓</b></div><div><span>二</span><b>○</b></div><div><span>三</span><b>○</b></div><div><span>四</span><b>○</b></div><div><span>五</span><b>○</b></div><div><span>六</span><b>○</b></div><div><span>日</span><b>○</b></div></div>
+              <div class="checkin-copy"><p><b id="checkinTitle">今天筛 3 个高匹配岗位</b><span>比盲目海投更接近回应。</span></p><button class="checkin-button" id="checkinButton">完成筛选并打卡</button></div>
+            </section>
+
+            <section class="dashboard-card offer-card">
+              <header><div class="card-label"><span class="dash-icon icon-offer">↗</span><div><h2>Offer 进度</h2><p>每一步都可追踪</p></div></div><button class="text-button" data-view="applications">查看任务 →</button></header>
+              <div class="offer-roadmap"><div class="building-lines"><i></i><i></i><i class="active-floor"></i><i></i><i></i></div><ol><li><span>5</span><div><b>Offer 沟通</b><small>薪资、入职与选择</small></div></li><li><span>4</span><div><b>面试阶段</b><small>表达匹配与能力</small></div></li><li class="current"><span>3</span><div><b>笔试 / 测评</b><small>当前关注事项</small></div></li><li><span>2</span><div><b>简历筛选</b><small>材料核对</small></div></li><li><span>1</span><div><b>目标定位</b><small>方向与岗位池</small></div></li></ol></div>
+            </section>
+
+            <section class="dashboard-card task-table-card">
+              <header><div class="card-label"><span class="dash-icon icon-tasks">↗</span><div><h2>我的投递进度</h2><p>只记录你确认过的状态</p></div></div><button class="text-button" data-view="applications">全部任务 →</button></header>
+              <div class="overview-table"><div class="table-head"><span>岗位</span><span>当前进度</span><span>下一步</span></div><div id="overviewTaskRows"></div></div>
+            </section>
+          </div>
+        </section>
+
+        <section id="jobs" class="view" aria-labelledby="jobsTitle">
+          <div class="page-heading">
+            <div><p class="eyebrow">精选自企业官网</p><h1 id="jobsTitle">发现适合你的机会</h1><p>每个岗位都说明匹配理由、申请门槛和官网投递路径。</p></div>
+            <button class="outline-button" data-toast="筛选器将在正式连接岗位数据后启用">⌘ 筛选岗位</button>
+          </div>
+          <div class="filter-row"><button class="filter-chip selected">为你推荐 <span>12</span></button><button class="filter-chip">产品运营</button><button class="filter-chip">上海</button><button class="filter-chip">实习</button><button class="filter-chip">官方渠道</button></div>
+          <div class="job-list full" id="allJobList"></div>
+        </section>
+
+        <section id="applications" class="view" aria-labelledby="applicationsTitle">
+          <div class="page-heading">
+            <div><p class="eyebrow">申请路径清晰可控</p><h1 id="applicationsTitle">投递任务</h1><p>账号注册、官网提交和后续流程，都保存在一个地方。</p></div>
+            <button class="primary-button" data-view="jobs">发现新岗位 <span>→</span></button>
+          </div>
+          <section class="status-rules" aria-label="状态更新规则">
+            <div><span class="rule-icon blue-rule">1</span><p><strong>自动记录</strong><br />收藏岗位、生成申请包、打开官网链接。</p></div>
+            <div><span class="rule-icon amber-rule">2</span><p><strong>用户确认</strong><br />完成注册、官网提交、笔试/面试/Offer 等进展。</p></div>
+            <div><span class="rule-icon green-rule">3</span><p><strong>后续可授权同步</strong><br />仅在你授权后读取支持网站的成功页或邮件回执。</p></div>
+          </section>
+          <div class="kanban" id="kanbanBoard">
+            <section class="kanban-column"><div class="kanban-head"><span>准备中</span><b id="prepCount">1</b></div><div class="kanban-cards" data-status="准备中"></div></section>
+            <section class="kanban-column featured"><div class="kanban-head"><span>待官网操作</span><b id="registerCount">1</b></div><div class="kanban-cards" data-status-group="待官网操作"></div></section>
+            <section class="kanban-column"><div class="kanban-head"><span>已投递</span><b id="appliedCount">1</b></div><div class="kanban-cards" data-status="已投递"></div></section>
+            <section class="kanban-column"><div class="kanban-head"><span>流程中</span><b id="processCount">0</b></div><div class="kanban-cards" data-status-group="流程中"></div></section>
+            <section class="kanban-column"><div class="kanban-head"><span>结果</span><b id="resultCount">0</b></div><div class="kanban-cards" data-status-group="结果"></div></section>
+          </div>
+        </section>
+
+        <section id="profile" class="view" aria-labelledby="profileTitle">
+          <div class="page-heading profile-heading">
+            <div><p class="eyebrow">只基于你确认的真实信息生成内容</p><h1 id="profileTitle">职业档案</h1><p>更新后，你的岗位推荐和申请材料会更准确。</p></div>
+            <span class="profile-complete"><b>4 层</b> 档案资料</span>
+          </div>
+          <section class="profile-privacy-note"><span class="privacy-star">✦</span><div><strong>资料按用途分层，不是一口气全部必填。</strong><p>职位匹配只使用职业目标、教育与经历；身份证、档案、家庭成员、健康等敏感资料不会参与推荐，仅在你选择需要这些字段的岗位时由你主动填写。当前是演示版，资料仅保存在本机浏览器；请勿录入真实证件号、亲属或健康信息。</p></div></section>
+          <form id="profileForm" class="profile-form">
+            <div class="profile-layout">
+              <section class="profile-card profile-identity"><div class="profile-avatar">V</div><h2>Victoria Chen</h2><p>上海 · 2027 届 · 市场营销</p><div class="profile-tags"><span>产品运营</span><span>用户研究</span><span>数据分析</span></div><button class="outline-button small" type="button" id="editProfile">开始完善资料</button><div class="profile-steps"><span class="done">✓ 核心资料</span><span>○ 教育证书</span><span>○ 经历材料</span><span>○ 国企专用</span></div></section>
+              <section class="profile-card profile-details"><div class="section-title"><div><p class="eyebrow">CAREER CORE</p><h2>求职目标与偏好</h2></div><button class="text-button" type="button" id="saveProfile">保存修改</button></div><div class="form-grid"><label>目标岗位<input name="role" value="产品运营 / 增长运营" /></label><label>首选城市<input name="location" value="上海、杭州" /></label><label>求职类型<select name="type"><option>2027 届实习 / 校招</option><option>实习</option><option>全职</option></select></label><label>工作权利<select name="rights"><option>中国大陆可合法工作</option><option>需要签证支持</option></select></label><label>期望薪资<input name="salary" placeholder="例如：8k–12k/月（按岗位填写）" /></label><label>可到岗时间<input name="availability" type="date" /></label><label class="full-width">我最看重的因素<textarea name="priority">成长空间、产品能力训练、与用户需求接近的工作内容</textarea></label></div></section>
+            </div>
+
+            <section class="profile-section" id="coreProfile">
+              <div class="section-title"><div><p class="eyebrow">STEP 1 · 申请基础信息</p><h2>基础身份、联系与档案</h2><p class="section-copy">网申常用字段。身份证、社保、详细住址和档案信息仅在目标岗位要求时填写。</p></div><span class="section-tag">按需填写</span></div>
+              <div class="form-grid dense">
+                <label>姓名<input name="fullName" placeholder="与身份证一致" /></label><label>性别<select name="gender"><option value="">请选择</option><option>男</option><option>女</option><option>其他/不便透露</option></select></label>
+                <label>民族<input name="ethnicity" placeholder="如：汉族" /></label><label>出生年月日<input name="birthDate" type="date" /></label>
+                <label class="sensitive-field">身份证号码<span class="sensitive-badge">敏感</span><input name="idNumber" autocomplete="off" placeholder="仅国企/实名网申要求时填写" /></label><label>政治面貌<select name="politicalStatus"><option value="">请选择</option><option>群众</option><option>共青团员</option><option>中共预备党员</option><option>中共党员</option></select></label>
+                <label>入团时间<input name="leagueDate" type="date" /></label><label>入党时间<input name="partyDate" type="date" /></label>
+                <label>预备转正时间<input name="partyRegularDate" type="date" /></label><label>手机号码<input name="phone" type="tel" placeholder="求职专用号码" /></label>
+                <label>电子邮箱<input name="email" type="email" placeholder="求职专用邮箱" /></label><label>身高（cm）<input name="height" inputmode="numeric" /></label>
+                <label>体重（kg）<input name="weight" inputmode="numeric" /></label><label>婚姻状况<select name="maritalStatus"><option value="">请选择</option><option>未婚</option><option>已婚</option><option>离异</option></select></label>
+                <label>驾驶证<select name="license"><option>无</option><option>C1</option><option>C2</option><option>其他</option></select></label><label>户籍所在地<input name="hukou" placeholder="精确到省/市/县" /></label>
+                <label class="full-width sensitive-field">现居住详细地址<span class="sensitive-badge">敏感</span><input name="residentialAddress" placeholder="仅需详细地址的网申填写" /></label>
+                <label>档案存放单位全称<input name="archiveInstitution" placeholder="学校 / 人才市场 / 人社局" /></label><label class="sensitive-field">档案存放详细地址<span class="sensitive-badge">敏感</span><input name="archiveAddress" /></label>
+                <label>档案接收联系人<input name="archiveContact" /></label><label>档案接收联系电话<input name="archivePhone" type="tel" /></label>
+                <label class="sensitive-field">社保卡号<span class="sensitive-badge">敏感</span><input name="socialSecurityNumber" autocomplete="off" placeholder="岗位明确要求时填写" /></label><label>备用联系电话<input name="backupPhone" type="tel" placeholder="家人/紧急联系人" /></label>
+                <label>紧急联系人姓名<input name="emergencyName" /></label><label>与本人关系<input name="emergencyRelation" /></label><label>紧急联系人电话<input name="emergencyPhone" type="tel" /></label>
+              </div>
+            </section>
+
+            <section class="profile-section">
+              <div class="section-title"><div><p class="eyebrow">STEP 2 · EDUCATION</p><h2>教育背景与证书</h2><p class="section-copy">专业名称、证书编号和日期按毕业证/证书原文填写。</p></div><button class="outline-button small" type="button" data-toast="正式版支持添加多段教育经历">＋ 添加一段教育</button></div>
+              <div class="form-grid dense">
+                <label>最高学历<select name="highestDegree"><option value="">请选择</option><option>专科</option><option>本科</option><option>硕士研究生</option><option>博士研究生</option></select></label><label>毕业院校全称<input name="school" /></label>
+                <label>学院<input name="college" /></label><label>专业全称<input name="major" placeholder="与毕业证一字不差" /></label>
+                <label>学习形式<select name="studyMode"><option>全日制普通高等教育</option><option>非全日制</option></select></label><label>学位<select name="degree"><option value="">请选择</option><option>学士</option><option>硕士</option><option>博士</option></select></label>
+                <label>入学时间<input name="educationStart" type="date" /></label><label>毕业/预计毕业时间<input name="educationEnd" type="date" /></label>
+                <label>GPA / 绩点<input name="gpa" /></label><label>专业排名<input name="majorRank" placeholder="如：8/120" /></label>
+                <label>是否统招<select name="admissionType"><option value="">请选择</option><option>是</option><option>否</option></select></label><label>应届生身份<select name="graduateStatus"><option value="">请选择</option><option>是</option><option>否</option></select></label>
+                <label class="sensitive-field">学位证书编号<span class="sensitive-badge">敏感</span><input name="degreeCertificateNo" autocomplete="off" /></label><label class="sensitive-field">毕业证书编号<span class="sensitive-badge">敏感</span><input name="diplomaNo" autocomplete="off" /></label>
+                <label class="full-width">外语水平<input name="languageCertificates" placeholder="如：CET-6 620；雅思 7.0；含成绩和证书编号" /></label>
+                <label>计算机证书<input name="computerCertificates" placeholder="如：计算机二级，含证书编号" /></label><label>其他职业资格证书<input name="professionalCertificates" placeholder="名称、取得时间、证书编号" /></label>
+                <label class="full-width">在校奖励荣誉<textarea name="honors" placeholder="时间 + 名称，例如：2025-11 校级一等奖学金"></textarea></label>
+              </div>
+            </section>
+
+            <section class="profile-section">
+              <div class="section-title"><div><p class="eyebrow">STEP 3 · EXPERIENCE</p><h2>实习与工作经历</h2><p class="section-copy">这些内容用于生成岗位专属简历；证明人资料不参与职位匹配。</p></div><button class="outline-button small" type="button" data-toast="正式版支持新增多段实习/工作经历">＋ 添加一段经历</button></div>
+              <div class="form-grid dense">
+                <label>工作/实习单位全称<input name="employer" /></label><label>部门<input name="department" /></label>
+                <label>岗位名称<input name="position" /></label><label>入职时间<input name="employmentStart" type="date" /></label>
+                <label>离职时间<input name="employmentEnd" type="date" /></label><label>证明人姓名<input name="referenceName" /></label>
+                <label>证明人联系电话<input name="referencePhone" type="tel" /></label><label class="full-width">工作内容与成果简述<textarea name="responsibilities" placeholder="建议写清职责、动作和结果；系统会以这些确认事实为依据生成简历。"></textarea></label>
+              </div>
+            </section>
+
+            <details class="sensitive-vault">
+              <summary><span><b>国央企 / 事业单位专用资料库</b><small>只在岗位明确要求家庭成员、政审或备案资料时展开填写</small></span><span class="vault-chip">敏感信息 · 不参与匹配</span></summary>
+              <div class="vault-body">
+                <p class="vault-notice">请按证件和事实如实填写；父母、配偶、子女、兄弟姐妹及祖父母/外祖父母等资料仅应在相应网申明确要求时采集。医疗、违法犯罪等问题需要用户在每次提交前再次确认。</p>
+                <h3>家庭主要成员：父亲 / 母亲</h3>
+                <div class="form-grid dense family-grid">
+                  <label>父亲姓名<input name="fatherName" /></label><label>父亲性别<input name="fatherGender" value="男" /></label><label>父亲出生年月日<input name="fatherBirthDate" type="date" /></label><label>父亲民族<input name="fatherEthnicity" /></label><label>父亲政治面貌<input name="fatherPoliticalStatus" /></label><label>父亲工作单位及职务<input name="fatherEmployer" placeholder="无工作可填务农/退休等" /></label><label>父亲户籍所在地<input name="fatherHukou" /></label>
+                  <label>母亲姓名<input name="motherName" /></label><label>母亲性别<input name="motherGender" value="女" /></label><label>母亲出生年月日<input name="motherBirthDate" type="date" /></label><label>母亲民族<input name="motherEthnicity" /></label><label>母亲政治面貌<input name="motherPoliticalStatus" /></label><label>母亲工作单位及职务<input name="motherEmployer" placeholder="无工作可填务农/退休等" /></label><label>母亲户籍所在地<input name="motherHukou" /></label>
+                </div>
+                <h3>主要社会关系</h3>
+                <div class="form-grid dense">
+                  <label>配偶（如有）<textarea name="spouse" placeholder="姓名、性别、出生日期、政治面貌、单位及职务"></textarea></label><label>子女（如有）<textarea name="children" placeholder="姓名、性别、出生日期"></textarea></label>
+                  <label>兄弟姐妹<textarea name="siblings" placeholder="姓名、关系、出生日期、政治面貌、单位及职务；无则填无"></textarea></label><label>祖父<textarea name="grandfather" placeholder="姓名、出生年月、政治面貌、单位及职务；已故请注明"></textarea></label>
+                  <label>祖母<textarea name="grandmother" placeholder="姓名、出生年月、政治面貌、单位及职务；已故请注明"></textarea></label><label>外祖父<textarea name="maternalGrandfather" placeholder="姓名、出生年月、政治面貌、单位及职务；已故请注明"></textarea></label>
+                  <label>外祖母<textarea name="maternalGrandmother" placeholder="姓名、出生年月、政治面貌、单位及职务；已故请注明"></textarea></label>
+                </div>
+                <h3>其他政审 / 网申字段</h3>
+                <div class="form-grid dense">
+                  <label>海外留学经历<select name="overseasExperience"><option>否</option><option>是</option></select></label><label>留学信息<input name="overseasDetails" placeholder="起止时间、国家、学校" /></label>
+                  <label>亲属在本单位/系统工作<select name="relativeAtEmployer"><option>否</option><option>是</option></select></label><label>回避关系说明<input name="relativeAtEmployerDetails" placeholder="姓名、关系、部门岗位" /></label>
+                  <label>是否服兵役<select name="militaryService"><option>否</option><option>是</option></select></label><label>兵役信息<input name="militaryDetails" placeholder="入伍/退伍时间、兵种" /></label>
+                  <label>有无违法犯罪记录<input name="criminalRecord" placeholder="如实填写" /></label><label>既往重大疾病史<input name="medicalHistory" placeholder="如实填写" /></label>
+                  <label>是否接受调剂<select name="adjustment"><option>否</option><option>是</option></select></label>
+                </div>
+              </div>
+            </details>
+            <div class="profile-save-bar"><div><strong>已填写的信息将作为“可复用事实库”</strong><p>针对具体岗位发送前，仍由你确认资料范围和最终答案。</p></div><button class="primary-button" type="button" id="saveProfileBottom">保存职业档案 <span>→</span></button></div>
+          </form>
+          <section class="facts-card"><div class="section-title"><div><p class="eyebrow">FACTS, NOT GUESSWORK</p><h2>已确认经历</h2></div><span class="verified">✓ 已验证 12 项</span></div><div class="experience-grid"><article><span class="company-dot coral"></span><div><strong>校园产品实验室 · 用户研究负责人</strong><p>访谈 30+ 名学生，完成需求洞察与功能优先级建议。</p></div></article><article><span class="company-dot blue"></span><div><strong>字节跳动青训营 · 增长项目</strong><p>负责活动复盘与漏斗分析，提出 3 项转化优化建议。</p></div></article><article><span class="company-dot green"></span><div><strong>Google Data Analytics Certificate</strong><p>数据清洗、可视化与商业分析基础。</p></div></article></div></section>
+        </section>
+
+      </main>
+    </div>
+
+    <div class="celebration-backdrop" id="celebrationModal" aria-hidden="true">
+      <section class="celebration-card" role="dialog" aria-modal="true" aria-labelledby="celebrationTitle">
+        <button class="close-celebration" id="closeCelebration" aria-label="关闭庆祝页">×</button>
+        <img src="assets/offer-celebration-reference.png" alt="Offer 大楼庆祝图案" />
+        <div><p>今日筛选打卡完成</p><h2 id="celebrationTitle">你离拿到 Offer 又近了一步。</h2><span>认真完成今天的一步，就值得为自己鼓掌。</span><button class="celebration-button" id="celebrationContinue">继续向前</button></div>
+      </section>
+    </div>
+
+    <div class="modal-backdrop" id="jobModal" aria-hidden="true">
+      <section class="job-modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+        <button class="close-modal" id="closeModal" aria-label="关闭">×</button>
+        <div id="modalContent"></div>
+      </section>
+    </div>
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    <script src="app.js"></script>
+  </body>
+</html>
